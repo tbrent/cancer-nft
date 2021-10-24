@@ -73,9 +73,11 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
         royaltyFraction = royaltyFraction_;
     }
 
-    function mint(address to) external onlyOwner {
-        _safeMint(to, collectionSize);
-        collectionSize++;
+    function mint(address to, uint256 amount) external onlyOwner {
+        for (uint256 i = 0; i < amount; i++) {
+            _safeMint(to, collectionSize);
+            collectionSize++;
+        }
     }
 
     function royaltyInfo(uint256, uint256 _salePrice) external view returns (address receiver, uint256 royaltyAmount) {
