@@ -1,6 +1,6 @@
-# PrimeVax CancerNFT
+# Cancer NFT
 
-This is a very simple NFT + Payment Splitter implementation for PrimeVax to use for their NFT distribution.
+This is a very simple NFT + Payment Splitter implementation for Cancer NFT Inc. to use for their NFT distribution.
 
 This design leaves configuration of the contracts deferred, to be done through etherscan after deployment, and therefore possibly by another entity. After they are satisfied the deployed contracts are to their liking, they should transfer ownership of both the NFT and Splitter to the zero address.
 

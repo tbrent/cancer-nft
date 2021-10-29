@@ -52,16 +52,12 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
 
     uint256 public collectionSize;
 
-    constructor(string memory name_, string memory symbol_, address owner_) ERC721(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) {
         _registerInterface(_INTERFACE_ID_ERC2981);
         _registerInterface(_INTERFACE_ID_ERC721);
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
-        transferOwnership(owner_);
-        royaltyDestination = address(new Splitter(owner_));
-    }
-
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721, IERC165) returns (bool) {
-        return _supportedInterfaces[interfaceId];
+        transferOwnership(_msgSender());
+        royaltyDestination = address(new Splitter(_msgSender()));
     }
 
     function setRoyaltyDestination(address royaltyDestination_) external onlyOwner {
@@ -87,6 +83,7 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
     function setURI(string memory uri_) external onlyOwner {
         uri = uri_;
     }
+
 
     function _baseURI() internal view override returns (string memory) {
         return uri;
