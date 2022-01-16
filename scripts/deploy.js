@@ -1,66 +1,57 @@
-const hre = require("hardhat")
-
-const { BigNumber } = require("ethers")
-
-const networkConfig = {
-    default: {
-        name: "hardhat",
-    },
-    31337: {
-        name: "localhost",
-    },
-    3: {
-        name: "ropsten",
-    },
-    1: {
-        name: "mainnet",
-    },
-}
+const hre = require('hardhat')
+const { BigNumber } = require('ethers')
 
 // getChainId: Returns current chain Id
 const getChainId = async (hre) => {
-    let _chainId
-    try {
-        _chainId = await hre.network.provider.send("eth_chainId")
-    } catch (e) {
-        console.log("failed to get chainId, falling back on net_version...")
-        _chainId = await hre.network.provider.send("net_version")
-    }
+  let _chainId
+  try {
+    _chainId = await hre.network.provider.send('eth_chainId')
+  } catch (e) {
+    console.log('failed to get chainId, falling back on net_version...')
+    _chainId = await hre.network.provider.send('net_version')
+  }
 
-    if (!_chainId) {
-        throw new Error(`could not get chainId from network`)
-    }
-    if (_chainId.startsWith("0x")) {
-        _chainId = BigNumber.from(_chainId).toString()
-    }
-    return _chainId
+  if (!_chainId) {
+    throw new Error(`could not get chainId from network`)
+  }
+  if (_chainId.startsWith('0x')) {
+    _chainId = BigNumber.from(_chainId).toString()
+  }
+  return _chainId
 }
 
 async function main() {
-    const [deployer] = await hre.ethers.getSigners()
-    const chainId = await getChainId(hre)
+  const [deployer] = await hre.ethers.getSigners()
+  const chainId = await getChainId(hre)
 
-    // Check if chain is supported
-    if (!networkConfig[chainId]) {
-        throw new Error(`Missing network configuration for ${hre.network.name}`)
-    }
+  console.log(`Starting full deployment on network ${hre.network.name} (${chainId})
+      with deployer account: ${deployer.address}`)
+  const NFT = await hre.ethers.getContractFactory('CancerNFT')
 
-    console.log(`Starting full deployment on network ${hre.network.name} (${chainId})`)
-    console.log(`Deployer account: ${deployer.address}\n`)
-    return
-    /********************** Deploy RSR ****************************************/
-    const NFT = await hre.ethers.getContractFactory("Cancer NFT")
-    const nft = await NFT.connect(deployer).deploy("Cancer NFT", "CNFT")
+  /********************** Deploy Tier 1 ****************************************/
+  const one = await NFT.connect(deployer).deploy('Cancer NFT Tier 1', 'CNFT1', 'test uri 1/')
+  await one.deployTransaction.wait()
+  console.log(`NFT deployed at address: ${one.address} on network ${hre.network.name} (${chainId}).`)
+  console.log(`Tx: ${one.deployTransaction.hash}\n`)
 
-    console.log(`NFT deployed at address: ${nft.address} on network ${hre.network.name} (${chainId}).`)
-    console.log(`Tx: ${nft.deployTransaction.hash}\n`)
+  /********************** Deploy Tier  ****************************************/
+  const two = await NFT.deploy('Cancer NFT Tier 2', 'CNFT2', 'test uri 2/')
+  await two.deployTransaction.wait()
+  console.log(`NFT deployed at address: ${two.address} on network ${hre.network.name} (${chainId}).`)
+  console.log(`Tx: ${two.deployTransaction.hash}\n`)
+
+  /********************** Deploy Tier 3 ****************************************/
+  const three = await NFT.deploy('Cancer NFT Tier 3', 'CNFT3', 'test uri 3/')
+  await three.deployTransaction.wait()
+  console.log(`NFT deployed at address: ${three.address} on network ${hre.network.name} (${chainId}).`)
+  console.log(`Tx: ${three.deployTransaction.hash}\n`)
 }
 
 main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-        console.error(error)
-        process.exit(1)
-    })
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
 
 // TO verify: `npx hardhat verify --network mainnet DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"``
