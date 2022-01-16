@@ -4,7 +4,7 @@ This is a very general NFT implementation to be used by Cancer NFT Inc. to use f
 
 ## NFT
 
-The NFT is an elastic collection, meaning the owner can mint any number of NFTs before they transfer ownership of the contract away. The tokenURI for each NFT is by default a combination of the defaultURI and its tokenID (index). However, it is also possible to set individual tokenURIs, bypassing this systematic approach. This allows easy 
+The NFT is an elastic collection, meaning the owner can mint any number of NFTs before they transfer ownership of the contract away. The tokenURI for each NFT is by default a combination of the defaultURI and its tokenID (index). However, it is also possible to set individual tokenURIs, bypassing this systematic approach. 
 
 In addition the NFT implements ERC-2981 and ERC-165.
 
