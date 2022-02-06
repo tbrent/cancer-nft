@@ -8,6 +8,10 @@ The NFT is an elastic collection, meaning the owner can mint any number of NFTs 
 
 In addition the NFT implements ERC-2981 and ERC-165.
 
+## Example Contract Parametrization
+
+- `baseURI`: ipfs://QmaUbNbGsb39EW8QvTUgJvvvHRjH59ABmf3vCGuGegcnp1
+
 ## Deployments
 
 ### Ropsten
@@ -16,5 +20,11 @@ In addition the NFT implements ERC-2981 and ERC-165.
 - Tier 2: https://ropsten.etherscan.io/address/0x68cf6A4cbb3958221eC5228cEEcad6dF7C9F16C7#code
 - Tier 3: https://ropsten.etherscan.io/address/0x05c2cF121c904fE22EaD40B738fDEAe61EdeDEF0
 
+### Rinkeby
+
+- Tier 1: https://rinkeby.etherscan.io/address/0x24eb91af302b802fdb2f917940c618c6e688c171#code
+
 ### Mainnet
 TODO
+
+- add documentation for 

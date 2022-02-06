@@ -41,7 +41,7 @@ interface IERC2981 is IERC165 {
  *     Instead, you can come back later and call `setTokenURI` in order to set individual IPFS hashes.
  *   - Either way, you should eventually call `transferOwnership` in order to finalize the collection.
  *
- * The License for the NFTs should be located at `baseURI` + 'LICENSE'
+ * The License for the NFTs should be located at `baseURI` + 'LICENSE.*'
  */
 contract CancerNFT is ERC721, IERC2981, Ownable {
     // ERC165
@@ -117,7 +117,7 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-        return string(abi.encodePacked(baseURI, Strings.toString(tokenId)));
+        return string(abi.encodePacked(baseURI, "/", Strings.toString(tokenId)));
     }
 
     function LICENSE() public view returns (string memory) {

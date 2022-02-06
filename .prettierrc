@@ -19,6 +19,13 @@
           "singleQuote": false,
           "tabWidth": 4
         }
+      },
+      {
+        "files": "*.js",
+        "options": {
+          "singleQuote": true,
+          "tabWidth": 2
+        }
       }
   ]
 }
