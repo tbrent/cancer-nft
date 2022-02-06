@@ -13,7 +13,7 @@ const MNEMONIC = process.env.MNEMONIC || ''
 
 task(
   'make-metadata',
-  "Makes a folder of metadata jsons for a single IPFS folder hash"
+  "Makes a folder of metadata jsons for a single IPFS folder hash containing PNG images"
 )
   .addOptionalParam('hash', 'IPFS path to a folder that contains all the artwork for a tier', undefined)
   .addOptionalParam('number', 'The quantity of NFT artworks in the folder', undefined)
@@ -28,7 +28,7 @@ task(
 
     // Write metadata files
     for (let i = 0; i < number; i++) {
-      const s = '{ "image": "ipfs://' + hash + '/' + i + '", "tag": "' + tag + '"}'
+      const s = '{ "image": "ipfs://' + hash + '/' + i + '.png", "tag": "' + tag + '"}'
 
       try{
         fs.writeFileSync('tmp/' + hash + '/' + i, s);
