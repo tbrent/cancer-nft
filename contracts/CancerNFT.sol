@@ -61,7 +61,7 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
     mapping(uint256 => NFT) tokens;
     uint256 public totalSupply;
 
-    string public baseURI; // this must end with a suffix of '/'
+    string public baseURI;
 
     event BaseURIChanged(string x, string y);
     event RoyaltyFractionChanged(uint256 indexed tokenId, uint8 x, uint8 y);

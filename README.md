@@ -25,6 +25,6 @@ In addition the NFT implements ERC-2981 and ERC-165.
 - Tier 1: https://rinkeby.etherscan.io/address/0x24eb91af302b802fdb2f917940c618c6e688c171#code
 
 ### Mainnet
-TODO
 
-- add documentation for 
+- Tier 1: https://etherscan.io/address/0x2e55528725c15f8efcb7d75a655ae7fe210fa7ad
+
