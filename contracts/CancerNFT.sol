@@ -93,7 +93,10 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
         require(royaltyRecipient != address(0), "not the 0 address");
         address to = owner();
         for (uint256 i = 0; i < number; i++) {
-            _mintHelper(to, royaltyRecipient, royaltyFraction);
+            _mint(to, totalSupply);
+            tokens[totalSupply].royaltyRecipient = royaltyRecipient;
+            tokens[totalSupply].royaltyFraction = royaltyFraction;
+            totalSupply++;
         }
     }
 
@@ -132,17 +135,6 @@ contract CancerNFT is ERC721, IERC2981, Ownable {
     }
 
     // Internal
-
-    function _mintHelper(
-        address to,
-        address royaltyRecipient,
-        uint8 royaltyFraction
-    ) internal {
-        _safeMint(to, totalSupply);
-        tokens[totalSupply].royaltyRecipient = royaltyRecipient;
-        tokens[totalSupply].royaltyFraction = royaltyFraction;
-        totalSupply++;
-    }
 
     function _registerInterface(bytes4 interfaceId) internal {
         require(interfaceId != 0xffffffff, "ERC165: invalid interface id");
